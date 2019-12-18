@@ -5,27 +5,28 @@ require('./lib/song')
 also_reload('lib/**/*.rb')
 
 get('/') do
-  @albums = Album.sort
+  # @albums = Album.sort
   erb(:landing_page)
 end
 
 get('/albums') do
   if params["search"]
     @albums = Album.search(params[:search])
-  else ()
+  else
     @albums = Album.sort
   end
   erb(:albums)
 end
 
-get('/albums/:id/edit') do
-  @album = Album.find(params[:id].to_i())
-  erb(:edit_album)
-end
-
 get('/albums/new') do
   erb(:new_album)
 end
+
+get('/albums/:id') do
+  @album = Album.find(params[:id].to_i())
+  erb(:album)
+end
+
 
 post('/albums') do
   values = *params.values
@@ -33,6 +34,11 @@ post('/albums') do
   album.save()
   @albums = Album.all() # Adding this line will fix the error.
   erb(:albums)
+end
+
+get('/albums/:id/edit') do
+  @album = Album.find(params[:id].to_i())
+  erb(:edit_album)
 end
 
 patch('/albums/:id') do

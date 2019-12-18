@@ -59,7 +59,7 @@ end
 # Get the detail for a specific song such as lyrics and songwriters.
 get('/albums/:id/songs/:song_id') do
   @song = Song.find(params[:song_id].to_i())
-  erb(:song)
+  erb(:songs)
 end
 
 # Post a new song. After the song is added, Sinatra will route to the view for the album the song belongs to.

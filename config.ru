@@ -1,2 +1,2 @@
-require ('./record_store_classwork')
+require ('./app')
 run Sinatra::Application
